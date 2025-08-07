@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Building | OneStop Solution</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<style>
+  /* === Service Page Styles (Optimized) === */
+
+/* Reset/Utility */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+}
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem 2rem;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  color: var(--text-light);
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.navbar .logo:hover,
+.navbar .logo:focus {
+  color: var(--accent-color);
+  outline: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.8rem;
+}
+
+.nav-links li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a:focus {
+  color: var(--accent-color);
+  text-decoration: underline;
+  outline: none;
+}
+
+/* Hamburger/Menu Toggle Button */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+  color: var(--accent-color);
+  outline: none;
+}
+
+/* Responsive Nav */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 0 0 12px 12px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Service Detail Section */
+.service-detail h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.service-detail p {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.service-detail ul {
+  list-style-type: disc;
+  margin-left: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--secondary-color);
+  font-size: 1.05rem;
+}
+
+.service-detail ul li {
+  margin-bottom: 0.6rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+  outline: none;
+}
+.btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+}
+.btn-whatsapp:hover {
+  background-color: #1ebc57;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  padding: 1.5rem 0;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  box-shadow: 0 -2px 10px var(--shadow-color);
+}
+</style>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">OneStop Solution</a>
+        <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+        <ul class="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <main class="service-detail">
+    <div class="container">
+      <h1>document-Editing</h1>
+      <p>We offer professional document editing services to enhance clarity, formatting, and overall presentation of your files.</p>
+<ul>
+  <li>Grammar correction and language improvement</li>
+  <li>Formatting for resumes, reports, and official documents</li>
+  <li>Conversion between PDF, Word, and other formats</li>
+  <li>Confidential and secure file handling</li>
+</ul>
+      <div class="btn-row">
+      <a href="index.html#services" class="btn btn-primary">← Back to Services</a>
+      <a href="https://wa.me/+918309070371" target="_blank" class="btn btn-whatsapp">📞 Chat on WhatsApp</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 OneStop Solution. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    // Toggle menu on small screens
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('show');
+    });
+  </script>
+</body>
+</html>

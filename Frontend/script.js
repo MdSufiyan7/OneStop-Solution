@@ -1,84 +1,54 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
+const contactForm = document.getElementById('contact-form');
+const formMessageDiv = document.getElementById('form-message');
 
-    // Create the success message element
-    const successMessage = document.createElement('div');
-    successMessage.style.display = 'none'; // Initially hide the message
-    successMessage.style.padding = '10px';
-    successMessage.style.marginTop = '20px';
-    successMessage.style.backgroundColor = '#28a745';
-    successMessage.style.color = '#fff';
-    successMessage.style.textAlign = 'center';
-    successMessage.style.borderRadius = '5px';
-    successMessage.textContent = 'Message Sent Successfully!';
+function showMessage(message, type = 'info') {
+  formMessageDiv.textContent = message;
+  formMessageDiv.style.color =
+    type === 'success' ? 'green' :
+    type === 'error' ? 'red' : 'black';
+  formMessageDiv.style.display = 'block'; // ✅ This makes sure it's visible
+}
 
-    // Insert the success message after the form
-    form.insertAdjacentElement('afterend', successMessage);
 
-    // Handle form submission
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the form from submitting
+contactForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-        // Display the success message
-        successMessage.style.display = 'block';
+  const name = document.getElementById('name')?.value.trim();
+  const email = document.getElementById('email')?.value.trim();
+  const subject = document.getElementById('subject')?.value.trim();
+  const message = document.getElementById('message')?.value.trim();
 
-        // Optionally, clear the form fields after submission
-        form.reset();
+  if (!name || !email || !subject || !message) {
+    showMessage('Please fill in all required fields.', 'error');
+    return;
+  }
 
-        // Hide the success message after 3 seconds
-        setTimeout(function () {
-            successMessage.style.display = 'none';
-        }, 3000);
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    showMessage('Please enter a valid email address.', 'error');
+    return;
+  }
+
+  showMessage('Sending your message...');
+  
+
+  try {
+    const response = await fetch('http://localhost:5000/api/contact', { // Change URL when deployed
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message }),
     });
-});
-//select all navigation links
-const navLinks=document.querySelectorAll('nav, div, div, ul, li, a');
 
-// add click event listener to each link
-/*
-navLinks.forEach(link=>{
-    link.addEventListener('click',(e)=>{
-        e.preventDefault();//prevent default link behavior
+    const data = await response.json();
 
-        //get the target section id from the data attributes
-        const targetId=link.getAttribute('nav-link');
-        const targetSection=document.getElementById(targetId);
-
-        //scroll to target section
-        targetSection.scrollIntoView({
-            behavior:'smooth',
-            block: 'start'
-        });
-    });
-});*/
-// JavaScript to handle form submission
-document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Prevent the form from refreshing the page
-
-    // Collect form data
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-
-    // Send form data to the backend
-    try {
-        const response = await fetch(' https://message-backend-bs7y5w11z-md-sufiyans-projects.vercel.app', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, message })
-        });
-
-        if (response.ok) {
-            alert('Message sent successfully!');
-            // Optionally, clear the form fields
-            document.getElementById('contactForm').reset();
-        } else {
-            alert('Failed to send message. Please try again.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
+    if (data.success) {
+      showMessage('Thank you for your message! We will get back to you soon.', 'success');
+      contactForm.reset();
+    } else {
+      showMessage(data.error || 'Failed to send message.', 'error');
     }
+  } catch (error) {
+    console.error('Error:', error);
+    showMessage('Server error. Please try again later.', 'error');
+  }
 });
