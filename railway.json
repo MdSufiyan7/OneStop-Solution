@@ -1,0 +1,9 @@
+{
+  "services": [
+    {
+      "name": "message-backend",
+      "path": "message-backend",
+      "startCommand": "npm start"
+    }
+  ]
+}
