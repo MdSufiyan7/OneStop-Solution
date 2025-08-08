@@ -33,7 +33,8 @@ contactForm?.addEventListener('submit', async (e) => {
   
 
   try {
-    const response = await fetch('http://localhost:5000/api/contact', { // Change URL when deployed
+    const response = await fetch('https://message-backend-production.up.railway.app/api/contact', 
+ { // Change URL when deployed
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, subject, message }),
